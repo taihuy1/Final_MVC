@@ -1,0 +1,63 @@
+﻿@model IEnumerable<FINALL.Models.RequestStatu>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Payment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.CName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PendingNote.CID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.ProductName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Payment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.CName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PendingNote.CID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.ProductName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RqID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RqID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RqID })
+        </td>
+    </tr>
+}
+
+</table>

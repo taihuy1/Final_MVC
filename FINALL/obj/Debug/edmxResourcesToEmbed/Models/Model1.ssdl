@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FINALLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ArriveNote">
+    <Key>
+      <PropertyRef Name="ArID" />
+    </Key>
+    <Property Name="ArID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ArDate" Type="date" Nullable="false" />
+    <Property Name="ProductID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ArPrice" Type="float" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CID" />
+    </Key>
+    <Property Name="CID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PendingNote">
+    <Key>
+      <PropertyRef Name="PendingID" />
+    </Key>
+    <Property Name="PendingID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="CID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="OPrice" Type="float" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="IPrice" Type="float" Nullable="false" />
+    <Property Name="EPrice" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RequestStatus">
+    <Key>
+      <PropertyRef Name="RqID" />
+    </Key>
+    <Property Name="RqID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CID" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProductID" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Payment" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_PendingNote">
+    <End Role="RequestStatus" Type="Self.RequestStatus" Multiplicity="1" />
+    <End Role="PendingNote" Type="Self.PendingNote" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="RequestStatus">
+        <PropertyRef Name="RqID" />
+      </Principal>
+      <Dependent Role="PendingNote">
+        <PropertyRef Name="PendingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PendingNote1">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="PendingNote" Type="Self.PendingNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CID" />
+      </Principal>
+      <Dependent Role="PendingNote">
+        <PropertyRef Name="CID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PendingNote2">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="PendingNote" Type="Self.PendingNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="PendingNote">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReceivedNote">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="ArriveNote" Type="Self.ArriveNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ArriveNote">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RequestStatus">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="RequestStatus" Type="Self.RequestStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CID" />
+      </Principal>
+      <Dependent Role="RequestStatus">
+        <PropertyRef Name="CID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RequestStatus1">
+    <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+    <End Role="RequestStatus" Type="Self.RequestStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="RequestStatus">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FINALLModelStoreContainer">
+    <EntitySet Name="ArriveNote" EntityType="Self.ArriveNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PendingNote" EntityType="Self.PendingNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RequestStatus" EntityType="Self.RequestStatus" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_PendingNote" Association="Self.FK_PendingNote">
+      <End Role="RequestStatus" EntitySet="RequestStatus" />
+      <End Role="PendingNote" EntitySet="PendingNote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PendingNote1" Association="Self.FK_PendingNote1">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="PendingNote" EntitySet="PendingNote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PendingNote2" Association="Self.FK_PendingNote2">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="PendingNote" EntitySet="PendingNote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReceivedNote" Association="Self.FK_ReceivedNote">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ArriveNote" EntitySet="ArriveNote" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RequestStatus" Association="Self.FK_RequestStatus">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="RequestStatus" EntitySet="RequestStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RequestStatus1" Association="Self.FK_RequestStatus1">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="RequestStatus" EntitySet="RequestStatus" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

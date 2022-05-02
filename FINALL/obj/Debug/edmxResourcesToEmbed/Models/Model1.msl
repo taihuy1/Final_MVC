@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FINALLModelStoreContainer" CdmEntityContainer="FINALLEntities1">
+    <EntitySetMapping Name="ArriveNotes">
+      <EntityTypeMapping TypeName="FINALLModel.ArriveNote">
+        <MappingFragment StoreEntitySet="ArriveNote">
+          <ScalarProperty Name="ArID" ColumnName="ArID" />
+          <ScalarProperty Name="ArDate" ColumnName="ArDate" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ArPrice" ColumnName="ArPrice" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="FINALLModel.Customer">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="CID" ColumnName="CID" />
+          <ScalarProperty Name="CName" ColumnName="CName" />
+          <ScalarProperty Name="CAddress" ColumnName="CAddress" />
+          <ScalarProperty Name="CPhone" ColumnName="CPhone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PendingNotes">
+      <EntityTypeMapping TypeName="FINALLModel.PendingNote">
+        <MappingFragment StoreEntitySet="PendingNote">
+          <ScalarProperty Name="PendingID" ColumnName="PendingID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CID" ColumnName="CID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="OPrice" ColumnName="OPrice" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="FINALLModel.Product">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="IPrice" ColumnName="IPrice" />
+          <ScalarProperty Name="EPrice" ColumnName="EPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RequestStatus">
+      <EntityTypeMapping TypeName="FINALLModel.RequestStatu">
+        <MappingFragment StoreEntitySet="RequestStatus">
+          <ScalarProperty Name="RqID" ColumnName="RqID" />
+          <ScalarProperty Name="CID" ColumnName="CID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
